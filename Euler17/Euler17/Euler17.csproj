@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NumberStringFormatter.cs" />
+    <Compile Include="NumberStringFormatterSpecs.cs" />
     <Compile Include="OnesAndTeens.cs" />
     <Compile Include="NumberConverter.cs" />
     <Compile Include="NumberConverterSpecs.cs" />

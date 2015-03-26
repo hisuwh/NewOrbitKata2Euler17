@@ -2,12 +2,19 @@
 {
     public class NumberConverter
     {
+        private const string Billion = "Billion";
         private const string Million = "Million";
         private const string Thousand = "Thousand";
         private const string Hundred = "Hundred";
         private const string And = "And";
         private const string Zero = "Zero";
 
+        private const int Ten = 10;
+        private const int AHundred = 100;
+        private const int AThousand = 1000;
+        private const int AMillion = 1000000;
+        private const int ABillion = 1000000000;
+        private const int Max = int.MaxValue;
 
         public string Convert(int number)
         {
@@ -21,32 +28,39 @@
                 return this.OnesAndTeensString(number);
             }
 
-            if (number < 100)
+            if (number < AHundred)
             {
-                var ten = (number / 10) * 10;
-                var remainder = number % 10;
+                var ten = (number / Ten) * Ten;
+                var remainder = number % Ten;
                 return TensString(ten) + this.HandleRemainder(string.Empty, remainder);
             }
 
-            if (number < 1000)
+            if (number < AThousand)
             {
-                var hundred = (number / 100);
-                var remainder = number % 100;
+                var hundred = (number / AHundred);
+                var remainder = number % AHundred;
                 return this.OnesAndTeensString(hundred) + Hundred + this.HandleRemainder(And, remainder);
             }
 
-            if (number < 1000000)
+            if (number < AMillion)
             {
-                var thousand = number / 1000;
-                var remainder = number % 1000;
+                var thousand = number / AThousand;
+                var remainder = number % AThousand;
                 return this.Convert(thousand) + Thousand + this.HandleRemainder(string.Empty, remainder);
             }
 
-            if (number < 1000000000)
+            if (number < ABillion)
             {
-                var million = number / 1000000;
-                var remainder = number % 1000000;
+                var million = number / AMillion;
+                var remainder = number % AMillion;
                 return this.Convert(million) + Million + this.HandleRemainder(string.Empty, remainder);
+            }
+
+            if (number < Max)
+            {
+                var billion = number / ABillion;
+                var remainder = number % ABillion;
+                return this.Convert(billion) + Billion + this.HandleRemainder(string.Empty, remainder);
             }
 
             return "";
