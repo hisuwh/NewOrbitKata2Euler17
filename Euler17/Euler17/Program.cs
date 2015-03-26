@@ -7,10 +7,70 @@
     {
         static void Main(string[] args)
         {
+            var exit = false;
 
-            Console.WriteLine(NaiveImplementation());
-            
-            Console.ReadLine();
+            while (!exit)
+            {
+
+                Console.WriteLine("What would you like to do?");
+                Console.WriteLine(" 1 - calculate number series string length");
+                Console.WriteLine(" 2 - convert number to string representation");
+                Console.WriteLine(" 3 - Exit");
+                var option = GetValue();
+
+                switch (option)
+                {
+                    case 3:
+                        exit = true;
+                        break;
+                    case 2:
+                        ConvertNumberToString();
+                        break;
+                    default:
+                        CalculateSeriesLength();
+                        break;
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private static void ConvertNumberToString()
+        {
+            Console.WriteLine("Convert number to string representation");
+            Console.WriteLine("Enter number:");
+            var number = GetValue();
+
+            var numberConverter = new NumberConverter();
+            var numberStringFormatter = new NumberStringFormatter();
+
+            var stringValue = numberConverter.Convert(number);
+            Console.WriteLine(numberStringFormatter.Format(stringValue));
+        }
+
+        private static void CalculateSeriesLength()
+        {
+            Console.WriteLine("Calculate number series string length.");
+            Console.WriteLine("From:");
+            var from = GetValue();
+            Console.WriteLine("To:");
+            var to = GetValue();
+
+            var seriesLengthCalculator = new SeriesLengthCalculator();
+
+            Console.WriteLine("Series string length: {0}", seriesLengthCalculator.SeriesLength(@from, to));
+        }
+
+        private static int GetValue()
+        {
+            int value;
+            var valid = false;
+            do
+            {
+                valid = int.TryParse(Console.ReadLine(), out value);
+            }
+            while (!valid);
+
+            return value;
         }
 
         /*
